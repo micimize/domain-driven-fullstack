@@ -1,11 +1,32 @@
-import Duckface from 'Duckface/src/duckface'
-import server from 'strictduck-server'
+import { extend, depends, implementable, provides } from 'strictduck'
 
-const Interface = new Duckface('DDServer', ['generateMiddleware']);
+const Server = extend({
+    name: 'Server', 
+    methods: ['use', 'listen'],
+})
 
-export default class DomainDrivenServer extends Server {
-    constructor(server){
-        super(server)
-        Duckface.ensureImplements(this, Interface);
+const DomainDrivenServer = extend({
+    name: 'DomainDrivenServer', 
+    parent: Server, 
+    methods: ['generateMiddleware']
+})
+
+const implementDependent = implementable(
+    depends,
+    {
+        parent: DomainDrivenServer,
+        dependencies: [Domains],
+        constructor: ({Domains, server}) => server(Domains)
     }
+)
+
+export function implement({parent, ...args}){
+    return provides(
+        {
+            parent: implementDependent({parent, ...args}),
+            ...args
+        }
+    )
 }
+
+export default DomainDrivenServer

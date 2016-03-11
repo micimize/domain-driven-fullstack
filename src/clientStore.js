@@ -7,7 +7,7 @@ let ClientStore = extend({
 
 export default extend({
     name: 'DomainDrivenClientStore', 
-    parent: 'ClientStore', 
+    parent: ClientStore, 
     methods: ['generateMiddleware']
 })
 
