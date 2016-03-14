@@ -1,23 +1,11 @@
-export default class Domain {
+import { extend, depends, implementable, provides } from 'strictduck'
 
-  constructor(prefix) {
-    this.prefix = prefix || ""
-  }
+export const Domain = extend({
+    name: 'Domain', 
+    methods: ['withPrefix', 'withoutPrefix', 'register', 'get']
+})
 
-  withPrefix(name) {
-    return (this.prefix == "" ? "" : this.prefix + "/") + name
-  }
-
-  withoutPrefix(name) {
-    return name.replace(new RegExp(`^${this.prefix}\/`),'')
-  }
-
-  register(type, name, value) {
-    this[type] = this[type] || {}
-    this[type][name] = value
-  }
-
-  get(type) {
-    return this[type] || {}
-  }
-}
+export const Domains = extend({
+    name: 'Domains', 
+    parent: 'Domain'
+})

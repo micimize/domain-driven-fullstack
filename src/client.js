@@ -1,23 +1,23 @@
 import { extend, depends, implementable, provides } from 'strictduck'
 import { Domains } from './Domain'
 
-const Server = extend({
-    name: 'Server', 
-    methods: ['use', 'listen'],
+const Client = extend({
+    name: 'Client', 
+    methods: ['render'],
 })
 
-const DomainDrivenServer = extend({
-    name: 'DomainDrivenServer', 
-    parent: Server, 
+export const DomainDrivenClient = extend({
+    name: 'DomainDrivenClient', 
+    parent: Client, 
     methods: ['generateMiddleware']
 })
 
 const implementDependent = implementable(
     depends,
     {
-        parent: DomainDrivenServer,
+        parent: DomainDrivenClient,
         dependencies: [Domains],
-        constructor: ({Domains, server}) => server(Domains)
+        constructor: ({Domains, client}) => client(Domains)
     }
 )
 
@@ -30,4 +30,4 @@ export function implement({parent, ...args}){
     )
 }
 
-export default DomainDrivenServer
+export default DomainDrivenClient

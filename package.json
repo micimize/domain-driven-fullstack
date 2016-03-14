@@ -1,7 +1,7 @@
 {
-  "name": "strictduck-domain-drivers",
+  "name": "strictduck-domain-driven-fullstack",
   "version": "0.0.1",
-  "description": "colletion of driver types for domain-drivers fullstack applications",
+  "description": "colletion of types for domain-driven fullstack applications",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" &&   exit 1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/strictduck/domain-drivers.git"
+    "url": "git+https://github.com/strictduck/domain-driven-fullstack.git"
   },
   "author": "Michael Joseph Rosenthal <rosenthalm93@gmail.com>",
   "license": "Apache-2.0",
@@ -20,9 +20,9 @@
     "strictduck": "strictduck/strictduck"
   },
   "bugs": {
-    "url": "https://github.com/strictduck/domain-drivers/issues"
+    "url": "https://github.com/strictduck/domain-driven-fullstack/issues"
   },
-  "homepage": "https://github.com/strictduck/domain-drivers#readme",
+  "homepage": "https://github.com/strictduck/domain-driven-fullstack#readme",
   "devDependencies": {
     "node-simple-webpacker": "github:michaeljosephrosenthal/node-simple-webpacker"
   }
