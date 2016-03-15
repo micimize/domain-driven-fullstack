@@ -1,4 +1,5 @@
-import { extend } from 'strictduck'
+import { extend, depends, implementable } from 'strictduck'
+import { Domains } from './Domain'
 import buildDomainDriver from './buildDomainDriver'
 
 let ClientStore = extend({
@@ -12,7 +13,7 @@ const implementDependent = implementable(
     depends,
     {
         parent: ClientStoreDomainDriver,
-        dependencies: [Domains, Store, routes]
+        dependencies: [Domains/*, Store, routes*/]
     }
 )
 
