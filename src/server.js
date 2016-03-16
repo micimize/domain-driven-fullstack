@@ -1,12 +1,12 @@
 import { extend, depends, implementable, provides } from 'strictduck'
-import { Domains } from './Domain'
+import { Domain } from './Domain'
 
 const Server = extend({
     name: 'Server', 
     methods: ['use', 'listen'],
 })
 
-const DomainDrivenServer = extend({
+export const DomainDrivenServer = extend({
     name: 'DomainDrivenServer', 
     parent: Server, 
     methods: ['generateMiddleware']
@@ -16,8 +16,8 @@ const implementDependent = implementable(
     depends,
     {
         parent: DomainDrivenServer,
-        dependencies: [Domains],
-        constructor: ({Domains, server}) => server(Domains)
+        dependencies: [Domain],
+        constructor: ({Domain, server}) => server(Domain)
     }
 )
 

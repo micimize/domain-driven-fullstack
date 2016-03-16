@@ -1,21 +1,21 @@
 import { extend, depends, implementable, provides } from 'strictduck'
 import { DomainDrivenClient } from './client'
-import { Domains } from './Domain'
+import Store from './clientStore'
+import Domain from './Domain'
 
 const implementDependent = implementable(
     depends,
     {
         name: 'DomainDrivenReactiveClient',
         parent: DomainDrivenClient,
-        dependencies: [Domains, Store, routes],
-        constructor: ({Domains, Client, Store, routes}) => Client({Domains, Store, routes})
+        dependencies: [Domain, Store]
     }
 )
 
-export function implement({parent, ...args}){
+export function implement({parent, constructor, ...args}){
     return provides(
         {
-            parent: implementDependent({parent, ...args}),
+            parent: implementDependent({constructor}),
             ...args
         }
     )

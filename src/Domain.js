@@ -40,10 +40,3 @@ class Domain {
 
 export default Domain
 export const implementation = implement({strictduck: DomainType, withClass: Domain})
-
-
-export const Domains = extend({
-    name: 'Domains', 
-    parent: Domain
-})
-
