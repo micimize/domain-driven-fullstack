@@ -11,7 +11,7 @@ export default class Fullstack extends Composit {
             Client: resolve.satisfies({ provider: client,  dependency: Client }) && true
         } 
         if(!Object.keys(satisfied).filter(v => !satisfied[v]).length) {
-            super( domains, server, client )
+            super({main: {Class: Server, method: 'provide'}},  domains, server, client )
         } else {
             throw TypeError(`Fullstack composition requirements not satisfield: \n ${JSON.stringify(satisfied)}`)
         }

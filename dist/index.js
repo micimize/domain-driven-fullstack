@@ -17,7 +17,7 @@ module.exports =
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8791f002048cbbce4bfb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a5e4ec72930fb703a9fa"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -674,6 +674,10 @@ module.exports =
 	
 	var _Domain = __webpack_require__(6);
 	
+	var _Domain2 = _interopRequireDefault(_Domain);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	var Server = (0, _strictduck.extend)({
@@ -689,7 +693,7 @@ module.exports =
 	
 	var implementDependent = (0, _strictduck.implementable)(_strictduck.depends, {
 	    parent: DomainDrivenServer,
-	    dependencies: [_Domain.Domain],
+	    dependencies: [_Domain2.default],
 	    constructor: function constructor(_ref) {
 	        var Domain = _ref.Domain;
 	        var server = _ref.server;
@@ -699,11 +703,16 @@ module.exports =
 	
 	function implement(_ref2) {
 	    var parent = _ref2.parent;
+	    var constructor = _ref2.constructor;
+	    var provider = _ref2.provider;
+	    var name = _ref2.name;
 	
-	    var args = _objectWithoutProperties(_ref2, ['parent']);
+	    var args = _objectWithoutProperties(_ref2, ['parent', 'constructor', 'provider', 'name']);
 	
 	    return (0, _strictduck.provides)(_extends({
-	        parent: implementDependent(_extends({ parent: parent }, args))
+	        parent: implementDependent({ name: name + 'Dependent', constructor: constructor }),
+	        name: name,
+	        provider: provider
 	    }, args));
 	}
 	
@@ -1017,7 +1026,7 @@ module.exports =
 	        if (!Object.keys(satisfied).filter(function (v) {
 	            return !satisfied[v];
 	        }).length) {
-	            var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Fullstack).call(this, domains, server, client));
+	            var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Fullstack).call(this, { main: { Class: _server.DomainDrivenServer, method: 'provide' } }, domains, server, client));
 	        } else {
 	            throw TypeError('Fullstack composition requirements not satisfield: \n ' + JSON.stringify(satisfied));
 	        }
