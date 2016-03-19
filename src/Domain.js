@@ -1,4 +1,4 @@
-import { extend, implement } from 'strictduck'
+import StrictDuck, { typedMap, extend, implement, resolve } from 'strictduck'
 
 const DomainType = extend({
     name: 'Domain', 
@@ -7,36 +7,44 @@ const DomainType = extend({
 
 class Domain {
 
-  constructor({name="", ...subdomains}) {
-    this.prefix = name
-    Object.keys(subdomains).forEach(
-        subName => this.registerSubdomain({name: subName, domain: subdomains[subName]})
-    )
-  }
+    constructor({name="", ...subdomains}) {
+        this.prefix = name
+        Object.keys(subdomains).forEach(
+            subName => this.registerSubdomain({name: subName, domain: subdomains[subName]})
+        )
+    }
 
-  withPrefix(name) {
-    return (this.prefix == "" ? "" : this.prefix + "/") + name
-  }
+    withPrefix(name) {
+        return (this.prefix == "" ? "" : this.prefix + "/") + name
+    }
 
-  withoutPrefix(name) {
-    return name.replace(new RegExp(`^${this.prefix}\/`),'')
-  }
+    withoutPrefix(name) {
+        return name.replace(new RegExp(`^${this.prefix}\/`),'')
+    }
 
-  register(type, name, value) {
-    this[type] = this[type] || {}
-    this[type][name] = value
-  }
+    register(type, name, value) {
+        this[type] = this[type] || {}
+        this[type][name] = value
+    }
 
-  registerSubdomain({name, domain}) {
-    Object.keys(domain).forEach(
-        key => this.register(name, key, domain[key])
-    )
-  }
+    registerSubdomain({name, domain}) {
+        Object.keys(domain).forEach(
+            key => this.register(name, key, domain[key])
+        )
+    }
 
-  get(type) {
-    return this[type] || {}
-  }
+    get(type) {
+        return this[type] || {}
+    }
 }
 
 export default Domain
 export const implementation = implement({strictduck: DomainType, withClass: Domain})
+
+export class Domains extends extend({name: 'Map'}) {
+    constructor(object){
+        resolve.objectContainsOnly({strictduck: Domain, object})
+        super(object)
+    }
+}
+

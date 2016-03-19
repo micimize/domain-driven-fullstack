@@ -17,7 +17,7 @@ module.exports =
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a5e4ec72930fb703a9fa"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "06b495edc8afb8954ff1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -674,10 +674,6 @@ module.exports =
 	
 	var _Domain = __webpack_require__(6);
 	
-	var _Domain2 = _interopRequireDefault(_Domain);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	var Server = (0, _strictduck.extend)({
@@ -693,11 +689,11 @@ module.exports =
 	
 	var implementDependent = (0, _strictduck.implementable)(_strictduck.depends, {
 	    parent: DomainDrivenServer,
-	    dependencies: [_Domain2.default],
+	    dependencies: [_Domain.Domains],
 	    constructor: function constructor(_ref) {
-	        var Domain = _ref.Domain;
+	        var Domains = _ref.Domains;
 	        var server = _ref.server;
-	        return server(Domain);
+	        return server(Domains);
 	    }
 	});
 	
@@ -731,80 +727,101 @@ module.exports =
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
-	exports.implementation = undefined;
+	exports.Domains = exports.implementation = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _strictduck = __webpack_require__(5);
+	
+	var _strictduck2 = _interopRequireDefault(_strictduck);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var DomainType = (0, _strictduck.extend)({
-	  name: 'Domain',
-	  methods: ['withPrefix', 'withoutPrefix', 'register', 'get']
+	    name: 'Domain',
+	    methods: ['withPrefix', 'withoutPrefix', 'register', 'get']
 	});
 	
 	var Domain = function () {
-	  function Domain(_ref) {
-	    var _this = this;
+	    function Domain(_ref) {
+	        var _this = this;
 	
-	    var _ref$name = _ref.name;
-	    var name = _ref$name === undefined ? "" : _ref$name;
+	        var _ref$name = _ref.name;
+	        var name = _ref$name === undefined ? "" : _ref$name;
 	
-	    var subdomains = _objectWithoutProperties(_ref, ['name']);
+	        var subdomains = _objectWithoutProperties(_ref, ['name']);
 	
-	    _classCallCheck(this, Domain);
+	        _classCallCheck(this, Domain);
 	
-	    this.prefix = name;
-	    Object.keys(subdomains).forEach(function (subName) {
-	      return _this.registerSubdomain({ name: subName, domain: subdomains[subName] });
-	    });
-	  }
-	
-	  _createClass(Domain, [{
-	    key: 'withPrefix',
-	    value: function withPrefix(name) {
-	      return (this.prefix == "" ? "" : this.prefix + "/") + name;
+	        this.prefix = name;
+	        Object.keys(subdomains).forEach(function (subName) {
+	            return _this.registerSubdomain({ name: subName, domain: subdomains[subName] });
+	        });
 	    }
-	  }, {
-	    key: 'withoutPrefix',
-	    value: function withoutPrefix(name) {
-	      return name.replace(new RegExp('^' + this.prefix + '/'), '');
-	    }
-	  }, {
-	    key: 'register',
-	    value: function register(type, name, value) {
-	      this[type] = this[type] || {};
-	      this[type][name] = value;
-	    }
-	  }, {
-	    key: 'registerSubdomain',
-	    value: function registerSubdomain(_ref2) {
-	      var _this2 = this;
 	
-	      var name = _ref2.name;
-	      var domain = _ref2.domain;
+	    _createClass(Domain, [{
+	        key: 'withPrefix',
+	        value: function withPrefix(name) {
+	            return (this.prefix == "" ? "" : this.prefix + "/") + name;
+	        }
+	    }, {
+	        key: 'withoutPrefix',
+	        value: function withoutPrefix(name) {
+	            return name.replace(new RegExp('^' + this.prefix + '/'), '');
+	        }
+	    }, {
+	        key: 'register',
+	        value: function register(type, name, value) {
+	            this[type] = this[type] || {};
+	            this[type][name] = value;
+	        }
+	    }, {
+	        key: 'registerSubdomain',
+	        value: function registerSubdomain(_ref2) {
+	            var _this2 = this;
 	
-	      Object.keys(domain).forEach(function (key) {
-	        return _this2.register(name, key, domain[key]);
-	      });
-	    }
-	  }, {
-	    key: 'get',
-	    value: function get(type) {
-	      return this[type] || {};
-	    }
-	  }]);
+	            var name = _ref2.name;
+	            var domain = _ref2.domain;
 	
-	  return Domain;
+	            Object.keys(domain).forEach(function (key) {
+	                return _this2.register(name, key, domain[key]);
+	            });
+	        }
+	    }, {
+	        key: 'get',
+	        value: function get(type) {
+	            return this[type] || {};
+	        }
+	    }]);
+	
+	    return Domain;
 	}();
 	
 	exports.default = Domain;
 	var implementation = exports.implementation = (0, _strictduck.implement)({ strictduck: DomainType, withClass: Domain });
+	
+	var Domains = exports.Domains = function (_extend) {
+	    _inherits(Domains, _extend);
+	
+	    function Domains(object) {
+	        _classCallCheck(this, Domains);
+	
+	        _strictduck.resolve.objectContainsOnly({ strictduck: Domain, object: object });
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Domains).call(this, object));
+	    }
+	
+	    return Domains;
+	}((0, _strictduck.extend)({ name: 'Map' }));
 
 /***/ },
 /* 7 */
@@ -998,10 +1015,6 @@ module.exports =
 	
 	var _Domain = __webpack_require__(6);
 	
-	var _Domain2 = _interopRequireDefault(_Domain);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -1012,14 +1025,15 @@ module.exports =
 	    _inherits(Fullstack, _Composit);
 	
 	    function Fullstack(_ref) {
-	        var domains = _ref.domains;
+	        var domainsObj = _ref.domains;
 	        var server = _ref.server;
 	        var client = _ref.client;
 	
 	        _classCallCheck(this, Fullstack);
 	
+	        var domains = new _Domain.Domains(domainsObj);
 	        var satisfied = {
-	            Domain: _strictduck.resolve.satisfies({ provider: domains, dependency: _Domain2.default }) && true,
+	            domains: _strictduck.resolve.satisfies({ provider: domains, dependency: _Domain.Domains }) && true,
 	            Server: _strictduck.resolve.satisfies({ provider: server, dependency: _server.DomainDrivenServer }) && true,
 	            Client: _strictduck.resolve.satisfies({ provider: client, dependency: _client.DomainDrivenClient }) && true
 	        };

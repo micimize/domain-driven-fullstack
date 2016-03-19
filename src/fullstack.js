@@ -1,14 +1,15 @@
 import { Composit, resolve } from 'strictduck'
 import { DomainDrivenClient as Client } from './client'
 import { DomainDrivenServer as Server } from './server'
-import Domain from './Domain'
+import { Domains } from './Domain'
 
 export default class Fullstack extends Composit {
-    constructor({ domains, server, client }){
+    constructor({ domains: domainsObj, server, client }){
+        let domains = new Domains(domainsObj);
         let satisfied = {
-            Domain: resolve.satisfies({ provider: domains, dependency: Domain }) && true,
-            Server: resolve.satisfies({ provider: server,  dependency: Server }) && true,
-            Client: resolve.satisfies({ provider: client,  dependency: Client }) && true
+            domains: resolve.satisfies({ provider: domains, dependency: Domains }) && true,
+            Server : resolve.satisfies({ provider:  server, dependency: Server  }) && true,
+            Client : resolve.satisfies({ provider:  client, dependency: Client  }) && true
         } 
         if(!Object.keys(satisfied).filter(v => !satisfied[v]).length) {
             super({main: {Class: Server, method: 'provide'}},  domains, server, client )
