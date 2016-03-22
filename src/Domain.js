@@ -41,10 +41,4 @@ class Domain {
 export default Domain
 export const implementation = implement({strictduck: DomainType, withClass: Domain})
 
-export class Domains extends extend({name: 'Map'}) {
-    constructor(object){
-        resolve.objectContainsOnly({strictduck: Domain, object})
-        super(object)
-    }
-}
-
+export const Domains = typedMap({name: 'Domains', strictduck: Domain})

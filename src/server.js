@@ -1,5 +1,6 @@
 import { extend, depends, implementable, provides, typedMap } from 'strictduck'
 import { Domains } from './Domain'
+import DomainDrivenClient from './client'
 
 const Server = extend({
     name: 'Server', 
@@ -21,15 +22,18 @@ const implementDependent = implementable(
     }
 )
 
-export function implement({parent, constructor, provider, name, ...args}){
-    return provides(
-        {
-            parent: implementDependent({name: `${name}Dependent`, constructor}),
-            name,
-            provider,
-            ...args
-        }
-    )
+export function implement({parent, constructor, provider, name, url, ...args}){
+    return ( JAVASCRIPT.CONTEXT == 'NODE' ) ?
+        provides(
+            {
+                parent: implementDependent({name: `${name}Dependent`, constructor}),
+                dependencies: [DomainDrivenClient],
+                name,
+                provider,
+                url,
+                ...args
+            }
+        ) : {name, url}
 }
 
 export default DomainDrivenServer
