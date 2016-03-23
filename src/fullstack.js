@@ -5,9 +5,11 @@ import { Domains } from './Domain'
 
 export default class Fullstack extends Composit {
     constructor({ domains: domainsObj, server, client }){
-        let serverSide = ( JAVASCRIPT.CONTEXT == 'NODE' )
+        let serverSide = ( $ES.CONTEXT == 'NODE' )
 
         let domains = new Domains(domainsObj);
+        console.log($ES.CONTEXT, client)
+        console.log($ES.CONTEXT,server)
         let satisfied = {
             domains: resolve.satisfies({ provider: domains, dependency: Domains }) && true,
             Server : serverSide ? resolve.satisfies({ provider:  server, dependency: Server  }) && true : true,

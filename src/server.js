@@ -23,7 +23,7 @@ const implementDependent = implementable(
 )
 
 export function implement({parent, constructor, provider, name, url, ...args}){
-    return ( JAVASCRIPT.CONTEXT == 'NODE' ) ?
+    return ( $ES.CONTEXT == 'NODE' ) ?
         provides(
             {
                 parent: implementDependent({name: `${name}Dependent`, constructor}),
