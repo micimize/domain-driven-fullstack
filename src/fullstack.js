@@ -4,20 +4,19 @@ import { DomainDrivenServer as Server } from './server'
 import { Domains } from './Domain'
 
 export default class Fullstack extends Composit {
-    constructor({ domains: domainsObj, server, client }){
-        let serverSide = ( $ES.CONTEXT == 'NODE' )
+    constructor({ domains: domainsObj, server, client, context = 'NODE' }){
 
         let domains = new Domains(domainsObj);
-        console.log($ES.CONTEXT, client)
-        console.log($ES.CONTEXT,server)
+
         let satisfied = {
             domains: resolve.satisfies({ provider: domains, dependency: Domains }) && true,
-            Server : serverSide ? resolve.satisfies({ provider:  server, dependency: Server  }) && true : true,
+            Server : resolve.satisfies({ provider:  server, dependency: Server  }) && true,
             Client : resolve.satisfies({ provider:  client, dependency: Client  }) && true
         } 
+
         if(!Object.keys(satisfied).filter(v => !satisfied[v]).length) {
 
-            let main = serverSide ?
+            let main = ( context == 'NODE' ) ?
                 { Class: Server, method: 'provide' } :
                 { Class: Client, method: 'provide' }
 
