@@ -1,5 +1,5 @@
 import { extend, depends, provides, implementable } from 'strictduck'
-import { Domain } from './Domain'
+import { Domains } from './Domain'
 import buildDomainDriver from './buildDomainDriver'
 
 let ClientStore = extend({
@@ -7,13 +7,17 @@ let ClientStore = extend({
     methods: ['getState', 'dispatch', 'subscribe', 'replaceReducer'],
 })
 
-const ClientStoreDomainDriver = buildDomainDriver(ClientStore)
+export const DomainDrivenClientStore = extend({
+    name: 'DomainDrivenClientStore', 
+    parent: ClientStore, 
+    methods: [/*'generateMiddleware'*/]
+})
 
 const implementDependent = implementable(
     depends,
     {
-        parent: ClientStoreDomainDriver,
-        dependencies: [Domain/*, Store, routes*/]
+        parent: DomainDrivenClientStore,
+        dependencies: [Domains]
     }
 )
 
@@ -26,4 +30,4 @@ export function implement({parent, ...args}){
     )
 }
 
-export default ClientStoreDomainDriver
+export default DomainDrivenClientStore
