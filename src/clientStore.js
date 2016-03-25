@@ -1,6 +1,5 @@
 import { extend, depends, provides, implementable } from 'strictduck'
 import { Domains } from './Domain'
-import buildDomainDriver from './buildDomainDriver'
 
 let ClientStore = extend({
     name: 'ClientStore', 
