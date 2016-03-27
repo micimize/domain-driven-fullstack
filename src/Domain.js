@@ -28,9 +28,13 @@ class Domain {
     }
 
     registerSubdomain({name, domain}) {
-        Object.keys(domain).forEach(
-            key => this.register(name, key, domain[key])
-        )
+        if(typeof(domain) == 'object') {
+            Object.keys(domain).forEach(
+                key => this.register(name, key, domain[key])
+            )
+        } else {
+            this[name] = domain
+        }
     }
 
     get(type) {

@@ -1,6 +1,7 @@
 import { extend, depends, implementable, provides, typedMap } from 'strictduck'
 import { Domains } from './Domain'
 import DomainDrivenClient from './client'
+import DomainDrivenStorePersistencePlugin from './domainDrivenStorePersistencePlugin'
 
 const Server = extend({
     name: 'Server', 
@@ -17,7 +18,7 @@ const implementDependent = implementable(
     depends,
     {
         parent: DomainDrivenServer,
-        dependencies: [Domains],
+        dependencies: [Domains, DomainDrivenStorePersistencePlugin],
         constructor: ({Domains, server}) => server(Domains)
     }
 )

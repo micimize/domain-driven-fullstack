@@ -2,13 +2,14 @@ import { extend, depends, implementable, provides } from 'strictduck'
 import { DomainDrivenClient } from './client'
 import Store from './clientStore'
 import { Domains } from './Domain'
+import DomainDrivenStorePersistencePlugin from './domainDrivenStorePersistencePlugin'
 
 const implementDependent = implementable(
     depends,
     {
         name: 'DomainDrivenReactiveClient',
         parent: DomainDrivenClient,
-        dependencies: [Domains, Store]
+        dependencies: [Domains, Store, DomainDrivenStorePersistencePlugin]
     }
 )
 

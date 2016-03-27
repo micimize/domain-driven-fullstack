@@ -1,10 +1,16 @@
 import { Composit, resolve } from 'strictduck'
 import { DomainDrivenClient as Client } from './client'
 import { DomainDrivenServer as Server } from './server'
+import Persister from './domainDrivenStorePersistencePlugin'
 import { Domains } from './Domain'
 
 export default class Fullstack extends Composit {
-    constructor({ domains: domainsObj, server, client, context = 'NODE' }){
+    constructor({ domains: domainsObj, server, client, persister, context = 'NODE' }){
+
+        if(!resolve.satisfies({ provider: persister, dependency: Persister })){
+            console.log(`Persister spec not satisfield by ${persister.name || persister.constructor.name}, dropping optional component from composition`)
+            persister = undefined
+        }
 
         let domains = new Domains(domainsObj);
 
@@ -23,6 +29,7 @@ export default class Fullstack extends Composit {
             super(
                 { main },
                 {dependency: Domains, provider: domains},
+                ...(persister ? [{dependency: Persister, provider: persister}] : []),
                 {dependency: Server, provider: server},
                 {dependency: Client, provider: client}
             )
