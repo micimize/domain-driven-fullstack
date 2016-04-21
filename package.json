@@ -1,6 +1,6 @@
 {
   "name": "strictduck-domain-driven-fullstack",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "colletion of types for domain-driven fullstack applications",
   "main": "dist/index.js",
   "scripts": {
@@ -18,14 +18,13 @@
     "node": ">=v5.4.1 <6.0"
   },
   "dependencies": {
-    "source-map-support": "^0.4.0",
-    "strictduck": "strictduck/strictduck"
+    "strictduck": "0.0.1"
   },
   "bugs": {
     "url": "https://github.com/strictduck/domain-driven-fullstack/issues"
   },
   "homepage": "https://github.com/strictduck/domain-driven-fullstack#readme",
   "devDependencies": {
-    "polypacker": "github:michaeljosephrosenthal/polypacker"
+    "polypacker": "0.1.0"
   }
 }
