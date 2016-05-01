@@ -1,6 +1,6 @@
 {
   "name": "strictduck-domain-driven-fullstack",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "colletion of types for domain-driven fullstack applications",
   "main": "dist/index.js",
   "scripts": {
@@ -12,18 +12,18 @@
     "url": "git+https://github.com/strictduck/domain-driven-fullstack.git"
   },
   "author": "Michael Joseph Rosenthal <rosenthalm93@gmail.com>",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "engines": {
     "node": ">=v5.4.1 <6.0"
   },
   "dependencies": {
-    "strictduck": "0.1.1"
+    "strictduck": "~0.1.2"
   },
   "bugs": {
     "url": "https://github.com/strictduck/domain-driven-fullstack/issues"
   },
   "homepage": "https://github.com/strictduck/domain-driven-fullstack#readme",
   "devDependencies": {
-    "polypacker": "0.1.1"
+    "polypacker": "0.1.2"
   }
 }
