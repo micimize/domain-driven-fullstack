@@ -1,4 +1,5 @@
-import { extend, depends, implementable, provides, typedMap } from 'strictduck'
+import { extend, implementable } from 'strictduck'
+import { depends, provides } from 'strictduck-control-inverted'
 import { Domains } from './Domain'
 import DomainDrivenClient from './client'
 import DomainDrivenStorePersistencePlugin from './domainDrivenStorePersistencePlugin'

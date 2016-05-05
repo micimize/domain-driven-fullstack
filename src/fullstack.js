@@ -1,4 +1,4 @@
-import { Composit, resolve } from 'strictduck'
+import { Composit, resolve } from 'strictduck-control-inverted'
 import { DomainDrivenClient as Client } from './client'
 import { DomainDrivenServer as Server } from './server'
 import Persister from './domainDrivenStorePersistencePlugin'
