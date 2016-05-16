@@ -1,4 +1,4 @@
-import StrictDuck, { extend, implement } from 'strictduck'
+import StrictDuck, { extend, implement, utils } from 'strictduck'
 import { typedMap, resolve } from 'strictduck-control-inverted'
 
 const DomainType = extend({
@@ -46,4 +46,4 @@ class Domain {
 export default Domain
 export const implementation = implement({strictduck: DomainType, withClass: Domain})
 
-export const Domains = typedMap({name: 'Domains', strictduck: Domain})
+export const Domains = typedMap({name: 'Domains', strictduck: implementation})

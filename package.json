@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/strictduck/domain-driven-fullstack#readme",
   "devDependencies": {
-    "polypacker": "0.1.5"
+    "polypacker": "0.1.7"
   }
 }
